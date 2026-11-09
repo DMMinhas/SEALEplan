@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { DateTime } from "luxon";
 import {
+  canonicalTimeZone,
   findLocalShift,
   isValidTimeZone,
   nextRefDstChange,
@@ -91,6 +92,11 @@ describe("reference week & DST look-ahead", () => {
     expect(isValidTimeZone("Mars/Olympus")).toBe(false);
     expect(isValidTimeZone("Europe/Berlin; drop table")).toBe(false);
     expect(isValidTimeZone(42)).toBe(false);
+  });
+
+  it("maps legacy browser zone names to canonical IANA names", () => {
+    expect(canonicalTimeZone("Asia/Katmandu")).toBe("Asia/Kathmandu");
+    expect(canonicalTimeZone("Asia/Phnom_Penh")).toBe("Asia/Phnom_Penh");
   });
 
   it("uses wall-clock Berlin time, not a fixed UTC offset", () => {

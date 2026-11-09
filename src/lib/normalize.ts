@@ -16,5 +16,4 @@ export function nameKey(name: string, organization: string): string {
   return `${normalizeText(name)}\u001f${normalizeText(organization)}`;
 }
 
-// eslint-disable-next-line no-control-regex
 export const CONTROL_CHARS = /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/u;

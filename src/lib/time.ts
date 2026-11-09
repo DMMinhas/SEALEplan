@@ -118,6 +118,24 @@ export function nextRefDstChange(
   return null;
 }
 
+/** Legacy IANA names some browsers still report → current canonical names. */
+const TZ_ALIASES: Record<string, string> = {
+  "Asia/Katmandu": "Asia/Kathmandu",
+  "Asia/Calcutta": "Asia/Kolkata",
+  "Asia/Saigon": "Asia/Ho_Chi_Minh",
+  "Asia/Rangoon": "Asia/Yangon",
+  "Asia/Dacca": "Asia/Dhaka",
+  "Asia/Thimbu": "Asia/Thimphu",
+  "Europe/Kiev": "Europe/Kyiv",
+  "America/Buenos_Aires": "America/Argentina/Buenos_Aires",
+  "Atlantic/Faeroe": "Atlantic/Faroe",
+  "Pacific/Enderbury": "Pacific/Kanton",
+};
+
+export function canonicalTimeZone(tz: string): string {
+  return TZ_ALIASES[tz] ?? tz;
+}
+
 const TZ_PATTERN = /^[A-Za-z0-9_+\-]+(\/[A-Za-z0-9_+\-]+){0,2}$/;
 
 export function isValidTimeZone(tz: unknown): tz is string {
