@@ -1,26 +1,67 @@
 @import "tailwindcss";
 
+/* System fonts only – no third-party font requests. */
+@theme {
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial,
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --color-ink: #111827; /* body text, 16.7:1 on white */
+  --color-muted: #4b5563; /* secondary text, 7.6:1 on white */
+  --color-line: #d1d5db;
+  --color-surface: #f9fafb;
+  --color-brand: #1e40af; /* links/buttons, 8.6:1 on white */
+  --color-brand-dark: #1e3a8a;
+
+  --color-avail: #047857; /* white text on it: 5.5:1 */
+  --color-ifneeded-bg: #fef3c7;
+  --color-ifneeded-ink: #78350f; /* 8.9:1 on #fef3c7 */
+  --color-ifneeded-line: #b45309;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  background: #ffffff;
+  color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+
+/* Diagonal stripes as a non-colour cue for "If needed". */
+.stripes-ifneeded {
+  background-color: var(--color-ifneeded-bg);
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(180, 83, 9, 0.16) 0 4px,
+    transparent 4px 9px
+  );
+}
+
+:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
