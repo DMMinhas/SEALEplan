@@ -35,8 +35,7 @@ export const pollConfig = {
 
   privacy: {
     controller: "the SEALE proposal coordination team",
-    /** Placeholder – replace with the real contact address before sharing the link. */
-    contactEmail: "seale-coordination@example.org",
+    contactEmail: "daud.minhas@aut.uni-saarland.de",
     retention:
       "Responses are deleted once the weekly meeting slot has been fixed, and at the latest when the proposal is submitted.",
   },
